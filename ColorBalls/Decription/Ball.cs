@@ -21,16 +21,14 @@ namespace ColorBalls.Decription
         private int thick = 5;
 
         private int row;
-        public int Row => row;
         private int column;
-        public int Column => column;
         private ImageBrush brush;
-
-        public int index;
+        
         public bool Checked = false;
         public string Color;
 
         public delegate void Clicking(int x, int y);
+        public event Clicking MouseMove;
         public event Clicking Click;
         public delegate void Deleting();
         public event Deleting Delete;
@@ -43,7 +41,7 @@ namespace ColorBalls.Decription
 
         private DoubleAnimation opacityAnim = new DoubleAnimation
         {
-            From = 0.3,
+            From = 0.5,
             To = 1,
             Duration = TimeSpan.FromSeconds(1),
             RepeatBehavior = RepeatBehavior.Forever,
@@ -59,11 +57,6 @@ namespace ColorBalls.Decription
             EasingFunction = new BounceEase()
         };
 
-        public Ball()
-        {
-            
-        }
-
         public Ball(int x, int y, ImageBrush color)
         {
             column = x;
@@ -77,11 +70,14 @@ namespace ColorBalls.Decription
                 Stretch = Stretch.UniformToFill,
                 Width = width,
                 Margin = new Thickness(thick),
-                Opacity = 1
-            };
+                Opacity = 1,
+                ToolTip = new ToolTip()
+                {
+                    Content = new StackPanel() { Children = { new TextBlock() { Text = row + " " + column } } }
+                }
+        };
 
-            ball.MouseEnter += (sender, args) =>{(sender as Ellipse).Opacity = 0.5;};
-            ball.MouseLeave += (sender, args) => {(sender as Ellipse).Opacity = 1;};
+            ball.MouseEnter += (sender, args) =>{MouseMove?.Invoke(column, row);};
             ball.MouseDown += (sender, args) =>
             {
                 if(args.RightButton == MouseButtonState.Pressed) Delete?.Invoke();
@@ -92,15 +88,30 @@ namespace ColorBalls.Decription
             ball.SetValue(Grid.ColumnProperty, column);
         }
 
+        public void SetCord(int x, int y)
+        {
+            row = y;
+            column = x;
+
+            ball.SetValue(Grid.RowProperty, row);
+            ball.SetValue(Grid.ColumnProperty, column);
+        }
+
         public void Check()
         {
-            ball.Stroke = new SolidColorBrush(Colors.Black);
+            ball.Effect = new DropShadowEffect()
+            {
+                Color = Colors.AliceBlue,
+                ShadowDepth = 0,
+                Opacity = 0.7,
+                BlurRadius = 15
+            };
             Checked = true;
         }
 
         public void Uncheck()
         {
-            ball.Stroke = new SolidColorBrush(Colors.Transparent);
+            ball.Effect = null;
             Checked = false;
         }
 
@@ -110,8 +121,6 @@ namespace ColorBalls.Decription
             Storyboard.SetTargetProperty(opacityAnim, new PropertyPath(UIElement.OpacityProperty));
            
             storyboard.Children.Add(opacityAnim);
-            //ball.BeginAnimation(Ellipse.OpacityProperty, opacityAnim);
-
             storyboard.Begin();
         }
 
@@ -129,7 +138,6 @@ namespace ColorBalls.Decription
 
             fallStoryboard.Children.Add(fallAnim);
             fallStoryboard.Begin();
-            //ball.BeginAnimation(Ellipse.MarginProperty, fallAnim);
         }
 
         public void StopCanDelete()

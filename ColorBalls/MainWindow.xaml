@@ -5,12 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ColorBalls"
         mc:Ignorable="d"
-        Title="MainWindow" Height="646.5" Width="1000" BorderBrush="White">
-    <Window.Background>
-        <ImageBrush ImageSource="pack://siteoforigin:,,,/Resources/xBRY0Ljrgi0.jpg" Stretch="UniformToFill"/>
-    </Window.Background>
-    <Grid x:Name="MainGrid" Margin="0,0,2,-1">
-        <Grid x:Name="GridDock" Margin="50,36,0,0" HorizontalAlignment="Left" Width="700" Grid.ShowGridLines="False" Height="490" VerticalAlignment="Top" Background="#B2FFFFFF">
+        Title="MainWindow" Height="539.7" Width="1000" BorderBrush="White" Background="#FF113348">
+    <Grid x:Name="MainGrid" Margin="0,0,1.6,3.4">
+        <Grid x:Name="GridDock" Margin="10,10,0,0" HorizontalAlignment="Left" Width="700" Grid.ShowGridLines="False" Height="490" VerticalAlignment="Top" Background="#FF091C28" Panel.ZIndex="1">
             <Grid.RowDefinitions>
                 <RowDefinition/>
                 <RowDefinition/>
@@ -32,9 +29,12 @@
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <Ellipse Grid.Column="1" Fill="#FFF4F4F5" HorizontalAlignment="Left" Grid.Row="1" Stroke="Black" VerticalAlignment="Top"/>
+            <Ellipse Grid.Column="5" Fill="#FFF4F4F5" Margin="5" Grid.Row="2" Stroke="Black" UseLayoutRounding="False" Panel.ZIndex="900" Grid.ColumnSpan="4" Width="60" Height="60" />
         </Grid>
-        <Ellipse HorizontalAlignment="Left" Height="91" Margin="766,112,0,0" Stroke="Black" VerticalAlignment="Top" Width="92">
+        <Ellipse HorizontalAlignment="Left" Height="184" Margin="770,36,0,0" VerticalAlignment="Top" Width="186" StrokeThickness="0">
+            <Ellipse.Effect>
+                <DropShadowEffect BlurRadius="50" ShadowDepth="0"/>
+            </Ellipse.Effect>
             <Ellipse.Fill>
                 <ImageBrush ImageSource="pack://siteoforigin:,,,/Resources/green.png" TileMode="FlipXY"/>
             </Ellipse.Fill>

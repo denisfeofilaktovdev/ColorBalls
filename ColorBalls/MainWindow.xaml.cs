@@ -21,18 +21,18 @@ namespace ColorBalls
     /// </summary>
     public partial class MainWindow : Window
     {
-        private Game CurrentGame;
+        private Dock CurrentDock;
 
         public MainWindow()
         {
             InitializeComponent();
 
-            CurrentGame = new Game();
-            CurrentGame.dock.Redraw += OnRedraw;
-            CurrentGame.Start();
+            CurrentDock = new Dock();
+            CurrentDock.Redraw += OnRedraw;
+            CurrentDock.DoRedraw();
         }
 
-        public void OnRedraw(Ball[,] balls)
+        private void OnRedraw(Ball[,] balls)
         {
             GridDock.Children.Clear();
             for (int x = 0; x < 10; x++)
