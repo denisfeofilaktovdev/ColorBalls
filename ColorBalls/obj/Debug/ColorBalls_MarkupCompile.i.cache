@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-F:\C#\ColorBalls\ColorBalls\obj\Debug\
+D:\C#\ColorBalls\ColorBalls\obj\Debug\
 ColorBalls
 none
 false
 DEBUG;TRACE
-F:\C#\ColorBalls\ColorBalls\App.xaml
-11151548125
 
-11-721802503
+4-1865389506
+
+131795215894
 14-1001767708
-MainWindow.xaml;
+App.xaml;GameOverSplash.xaml;MainWindow.xaml;Splash.xaml;
 
 False
 

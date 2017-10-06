@@ -5,39 +5,23 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ColorBalls"
         mc:Ignorable="d"
-        Title="MainWindow" Height="539.7" Width="1000" BorderBrush="White" Background="#FF113348">
-    <Grid x:Name="MainGrid" Margin="0,0,1.6,3.4">
-        <Grid x:Name="GridDock" Margin="10,10,0,0" HorizontalAlignment="Left" Width="700" Grid.ShowGridLines="False" Height="490" VerticalAlignment="Top" Background="#FF091C28" Panel.ZIndex="1">
-            <Grid.RowDefinitions>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
-            <Ellipse Grid.Column="5" Fill="#FFF4F4F5" Margin="5" Grid.Row="2" Stroke="Black" UseLayoutRounding="False" Panel.ZIndex="900" Grid.ColumnSpan="4" Width="60" Height="60" />
-        </Grid>
-        <Ellipse HorizontalAlignment="Left" Height="184" Margin="770,36,0,0" VerticalAlignment="Top" Width="186" StrokeThickness="0">
+        Title="MainWindow" Height="632.7" Width="944.5" Background="#FF113348">
+    <Grid x:Name="MainGrid" Margin="0,0,2,4">
+
+        <Ellipse HorizontalAlignment="Left" Height="147" Margin="754,31,0,0" VerticalAlignment="Top" Width="148" StrokeThickness="0" Grid.ColumnSpan="2" MouseLeftButtonDown="Ellipse_MouseLeftButtonDown" MouseLeftButtonUp="Ellipse_MouseLeftButtonUp" Grid.RowSpan="2">
             <Ellipse.Effect>
-                <DropShadowEffect BlurRadius="50" ShadowDepth="0"/>
+                <DropShadowEffect ShadowDepth="0" BlurRadius="50" Opacity="0.685"/>
             </Ellipse.Effect>
             <Ellipse.Fill>
                 <ImageBrush ImageSource="pack://siteoforigin:,,,/Resources/green.png" TileMode="FlipXY"/>
             </Ellipse.Fill>
         </Ellipse>
+        <Canvas x:Name="MainPanel" HorizontalAlignment="Left" Height="500" Margin="10,10,0,0" VerticalAlignment="Top" Width="710" Background="#FF091C28" Grid.RowSpan="2"/>
+        <Canvas x:Name="NextBallsCanvas" HorizontalAlignment="Left" Height="80" Margin="10,508,0,0" VerticalAlignment="Top" Width="710" Background="#FF02111B"/>
+        <Label x:Name="lblScore" Content="0" HorizontalAlignment="Left" Margin="754,31,0,0" VerticalAlignment="Top" Height="147" Width="148" FontSize="72" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Foreground="#FF113348">
+            <Label.Effect>
+                <DropShadowEffect BlurRadius="23" ShadowDepth="2"/>
+            </Label.Effect>
+        </Label>
     </Grid>
 </Window>

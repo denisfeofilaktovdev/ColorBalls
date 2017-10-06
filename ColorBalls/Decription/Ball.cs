@@ -69,13 +69,15 @@ namespace ColorBalls.Decription
                 Fill = color,
                 Stretch = Stretch.UniformToFill,
                 Width = width,
+                //Margin = new Thickness(thick + 70*column, thick + 70*row, thick, thick),
                 Margin = new Thickness(thick),
                 Opacity = 1,
                 ToolTip = new ToolTip()
                 {
                     Content = new StackPanel() { Children = { new TextBlock() { Text = row + " " + column } } }
-                }
-        };
+                },
+                
+            };
 
             ball.MouseEnter += (sender, args) =>{MouseMove?.Invoke(column, row);};
             ball.MouseDown += (sender, args) =>
@@ -84,17 +86,42 @@ namespace ColorBalls.Decription
                 else Click?.Invoke(column, row);
             };
 
+            //ball.SetValue(Canvas.LeftProperty, (thick + 70 * column)/700);
+            //ball.SetValue(Canvas.TopProperty, thick + 70 * row);
+
+            Canvas.SetLeft(ball, thick + 70 * column);
+            Canvas.SetTop(ball, thick + 70 * row);
+
             ball.SetValue(Grid.RowProperty, row);
             ball.SetValue(Grid.ColumnProperty, column);
         }
 
         public void SetCord(int x, int y)
         {
+            DoubleAnimation MoveTopAnimation = new DoubleAnimation()
+            {
+                From = thick + 70 * row,
+                To = thick + 70 * y,
+                Duration = TimeSpan.FromMilliseconds(300),
+                EasingFunction = new CircleEase()
+            };
+
+            DoubleAnimation MoveLeftAnimation = new DoubleAnimation()
+            {
+                From = thick + 70 * column,
+                To = thick + 70 * x,
+                Duration = TimeSpan.FromMilliseconds(300),
+                EasingFunction = new CircleEase()
+            };
+
+            MoveTopAnimation.Completed += (sender, args) => { Canvas.SetTop(ball, thick + 70 * y); };
+            MoveLeftAnimation.Completed += (sender, args) => { Canvas.SetLeft(ball, thick + 70 * x); };
+
+            ball.BeginAnimation(Canvas.TopProperty, MoveTopAnimation);
+            ball.BeginAnimation(Canvas.LeftProperty, MoveLeftAnimation);
+
             row = y;
             column = x;
-
-            ball.SetValue(Grid.RowProperty, row);
-            ball.SetValue(Grid.ColumnProperty, column);
         }
 
         public void Check()
